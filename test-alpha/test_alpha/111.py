@@ -3,11 +3,11 @@ import numpy as np
 from .import_deps import *  # import dependencies
 
 
-class A0000(AlphaBase):
+class AlphaTestPvCs0(AlphaBase):
     def set_default_params(self):
-        self._param_normalize_lookback = 12 * 24 * 7
+        self._param_diff_lookback = 12 * 24
         # alpha smooth ewm
-        self._param_smooth_halflife = 12 * 8
+        self._param_smooth_halflife = 12
 
     def __init__(self,
                  universe,
@@ -25,9 +25,11 @@ class A0000(AlphaBase):
 
     def generate(self, untrust_count=0, **inputs):
         """
-        def a0():
-            sig = TsScaleToBook(lookback=288 * 7)(TsEwmRsi()(close[[CS("ETHUSD")]]))
-            sig = TsEwm(halflife=96)(sig)
+        def a1():
+            close_nom = np.log(close)
+            close_diff = TsChange(lookback=288, method="diff")(close_nom)
+            sig = (np.nanmean(close_diff) - close_diff) * 0.01
+            sig = TsEwm(halflife=12)(sig)
             return sig
         """
 
@@ -35,13 +37,12 @@ class A0000(AlphaBase):
         self.assert_inputs_length(1, **inputs)
 
         close = inputs['close']
-        sig = self.sub_op(
-            contek_op_lib.TsScaleToBook,
-            params={'lookback': self._param_normalize_lookback}
-        )(
-            untrust_count,
-            input0=self.sub_op(contek_op_lib.TsEwmRsi)(untrust_count, input0=close)
-        )
+        close_log = np.log(close)
+        close_diff = self.sub_op(
+            contek_op_lib.TsChange,
+            params={'lookback': self._param_diff_lookback, 'method': "diff"}
+        )(untrust_count, input0=close_log)
+        sig = (np.nanmean(close_diff) - close_diff) * 0.01
         sig = self.sub_op(
             contek_op_lib.TsEwm,
             params={'halflife': self._param_smooth_halflife}
