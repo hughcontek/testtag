@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "test-alpha"
+version = "0.0.0"
+description = ""
+authors = ["LiXu <hugh@contek.io>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+contek-op-lib = "^2.7.0"
+contek-pyutils = "^2.7.0"
+
+
+[[tool.poetry.source]]
+name = "contek-pypi"
+url = "http://jfrog.contek.dev:8081/artifactory/api/pypi/contek-pypi/simple/"
+priority = "default"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

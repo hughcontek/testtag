@@ -1,0 +1,16 @@
+universe: [ ETHUSD ]
+least_duration: 180d
+
+datasets:
+
+- name: close
+  source: binance_futures
+  category: candle_usdt
+  field: close
+  interval: 5m
+
+alpha:
+  name: test_pv_ts_0
+  class: test_alpha.AlphaTestPvTs0
+  # parameters
+  interval: 5m

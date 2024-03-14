@@ -1,0 +1,16 @@
+universe: OWL_TRADE_UNIVERSE
+least_duration: 180d
+
+datasets:
+
+- name: close
+  source: binance_futures
+  category: candle_usdt
+  field: close
+  interval: 5m
+
+alpha:
+  name: test_pv_cs_0
+  class: test_alpha.AlphaTestPvCs0
+  # parameters
+  interval: 5m

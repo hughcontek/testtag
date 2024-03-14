@@ -1,0 +1,7 @@
+universe: [BTCUSD, ETHUSD]
+trigger_interval_in_s: 1
+
+alpha:
+  name: dodo
+  class: test_alpha.AlphaIncrementalTs0
+  interval: 1s

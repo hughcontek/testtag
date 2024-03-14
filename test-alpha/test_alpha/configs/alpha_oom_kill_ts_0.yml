@@ -1,0 +1,22 @@
+universe: [BTCUSD, ETHUSD]
+least_duration: 180d
+
+datasets:
+
+- name: prices
+  source: binance_futures
+  category: candle_usdt
+  field: close
+  exchange: binance
+  symbol_type: LINEAR_PERP
+  quote: USDT
+  interval: 5m
+  overwrite_count: 9
+  untrusted_count: 99
+
+
+alpha:
+  name: test_raise_ts_1
+  class: test_alpha.AlphaOOMKillTs0
+  # parameters
+  interval: 5m

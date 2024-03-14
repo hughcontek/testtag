@@ -1,0 +1,31 @@
+universe: [BTCUSD, ETHUSD]
+least_duration: 10d
+
+datasets:
+
+- name: test_0
+  source: test_0
+  exchange: binance
+  category: test_0
+  symbol_type: LINEAR_PERP
+  field: test_0
+  quote: USDT
+  interval: 5s
+  least_duration: 12h
+  overwrite_count: 9
+  null_fill_policy: forward_fill
+  nan_fill_policy: forward_fill
+  zero_fill_policy: forward_fill
+  untrusted_count: 99
+  conditions: [latency_prob, max_latency, zero_prob, nan_prob]
+  latency_prob: 0
+  max_latency: 0s
+  zero_prob: 0
+  nan_prob: 0
+
+
+alpha:
+  name: test_timeout_ts_0
+  class: test_alpha.AlphaTimeoutTs0
+  # parameters
+  interval: 5s
