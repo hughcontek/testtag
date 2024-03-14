@@ -1,7 +1,7 @@
 from .import_deps import *  # import dependencies
 
 
-class AlphaRaiseTs0(AlphaBase):
+class AlphaRadddiseTs0(AlphaBase):
     """
     Alpha class
     """
